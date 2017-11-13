@@ -1,0 +1,31 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "SiteMaster.cshtml";
+}
+
+    <!-- Hero Start -->
+    <div class="jumbotron">
+        <h1 class="display-3">@Model.Content.Headline</h1>
+        <div class="lead">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="@Model.Content.HomeImage.Url?width=600" alt="Alternate Text" />
+                    </div>
+                    <div class="col-md-8">
+                        @Model.Content.BodyText
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+
+@Html.Partial("FeaturedNews")
+
+@Html.Partial("LatestNews")

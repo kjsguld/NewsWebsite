@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+<div class="container">
+    <h2>Latest News</h2>
+    <div class="row">
+        @{
+            //get all the news from the news section
+            var news = Model.Content.Site()
+                .Descendants<News>()
+                .OrderByDescending(x => x.CreateDate)
+                .Take(3);
+
+            //present the news
+            foreach (var item in news)
+            {
+                <div class="col-md-4">
+                    <img class="img-fluid" src="@item.NewsImage.Url" alt="Alternate Text" />
+                    <h2>@item.Headline</h2>
+                    <hr />
+                    <p>@item.CreateDate.ToShortTimeString()</p>
+                    <p>@item.Excerpt</p>
+                    <a class="btn btn-primary" href="@item.Url">Read more</a>
+                </div>
+            }
+        }
+    </div>
+</div>

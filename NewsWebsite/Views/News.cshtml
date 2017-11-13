@@ -1,0 +1,42 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.News>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "siteMaster.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <ul class="breadcrumb">
+            @foreach (var ancestor in Model.Content.Ancestors().OrderBy("Level"))
+            {
+                <li class="breadcrumb-item"><a href="@ancestor.Url">@ancestor.Name</a></li>
+            }
+            <li class="breadcrumb-item active">@Model.Content.Name</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Content.Headline</h1>
+            @Model.Content.BodyText
+        </div>
+        <div class="col-md-4">
+            <img class="img-fluid" src="@Model.Content.NewsImage.Url" alt="Alternate Text" />
+            <hr />
+            <h3>Latest news </h3>
+            @{
+                var links = Model.Content.Siblings<News>()
+                    .Where( x => x.Id != Model.Content.Id)
+                    .OrderByDescending(x => x.CreateDate)
+                    .Take(3);
+
+                <ul class="list-group">
+                    @foreach (var link in links)
+                    {
+                        <li class="list-group-item"><a href="@link.Url">@link.Headline</a></li>
+                    }                    
+                </ul>
+                
+            }
+        </div>
+    </div>
+</div>
