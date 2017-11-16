@@ -29,6 +29,9 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Meta title</summary>
 		string MetaTitle { get; }
+
+		/// <summary>Hide in navigation?</summary>
+		bool UmbracoNaviHide { get; }
 	}
 
 	/// <summary>MetaBase</summary>
@@ -79,5 +82,17 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Meta title</summary>
 		public static string GetMetaTitle(IMetaBase that) { return that.GetPropertyValue<string>("metaTitle"); }
+
+		///<summary>
+		/// Hide in navigation?
+		///</summary>
+		[ImplementPropertyType("UmbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return GetUmbracoNaviHide(this); }
+		}
+
+		/// <summary>Static getter for Hide in navigation?</summary>
+		public static bool GetUmbracoNaviHide(IMetaBase that) { return that.GetPropertyValue<bool>("UmbracoNaviHide"); }
 	}
 }

@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{ 
+    var searchQuery = ( Request["q"]!= null ? Request["q"] : string.Empty);
+    var searchResults = Umbraco.TypedSearch(searchQuery);
+}
+<p>Your search for <strong>@searchQuery</strong> returned @searchResults.Count() results:</p>
+
+@foreach(var item in searchResults)
+{
+    <div>
+        <a href="@item.Url">@item.Name</a>
+    </div>
+}
+

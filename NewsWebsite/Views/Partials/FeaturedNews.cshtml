@@ -1,23 +1,29 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
 
 <div class="container">
     <h2>Featured News</h2>
     <div class="row">
         @{
             //Get the higest ordered news
-            var news = Model.Content.Site()
-                .Descendants<News>()
-                .Take(3);
-
+            var news = Model.Content.Featured;
             //present the news
             foreach (var item in news)
             {
+                try
+                {
+                    var image = Umbraco.Media(item.GetPropertyValue("newsImage"));
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
                 <div class="col-md-4">
-                    <img class="img-fluid" src="@item.NewsImage.Url" alt="Alternate Text" />
-                    <h2>@item.Headline</h2>
+                    <h2>@item.GetPropertyValue("Headline")</h2>
                     <hr />
-                    <p>@item.CreateDate.ToShortTimeString()</p>
-                    <p>@item.Excerpt</p>
+                    <p>@item.GetPropertyValue("newsdate")</p>
+                    <p>@item.GetPropertyValue("Excerpt")</p>
                     <a class="btn btn-primary" href="@item.Url">Read more</a>
                 </div>
             }

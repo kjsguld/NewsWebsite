@@ -55,6 +55,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// News date
+		///</summary>
+		[ImplementPropertyType("newsDate")]
+		public DateTime NewsDate
+		{
+			get { return this.GetPropertyValue<DateTime>("newsDate"); }
+		}
+
+		///<summary>
 		/// News image
 		///</summary>
 		[ImplementPropertyType("newsImage")]
@@ -97,6 +106,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MetaTitle
 		{
 			get { return Umbraco.Web.PublishedContentModels.MetaBase.GetMetaTitle(this); }
+		}
+
+		///<summary>
+		/// Hide in navigation?
+		///</summary>
+		[ImplementPropertyType("UmbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaBase.GetUmbracoNaviHide(this); }
 		}
 	}
 }

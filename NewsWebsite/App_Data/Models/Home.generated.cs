@@ -64,6 +64,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Featured
+		///</summary>
+		[ImplementPropertyType("featured")]
+		public IEnumerable<IPublishedContent> Featured
+		{
+			get { return this.GetPropertyValue<IEnumerable<IPublishedContent>>("featured"); }
+		}
+
+		///<summary>
 		/// Home Image
 		///</summary>
 		[ImplementPropertyType("homeImage")]
@@ -106,6 +115,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string MetaTitle
 		{
 			get { return Umbraco.Web.PublishedContentModels.MetaBase.GetMetaTitle(this); }
+		}
+
+		///<summary>
+		/// Hide in navigation?
+		///</summary>
+		[ImplementPropertyType("UmbracoNaviHide")]
+		public bool UmbracoNaviHide
+		{
+			get { return Umbraco.Web.PublishedContentModels.MetaBase.GetUmbracoNaviHide(this); }
 		}
 	}
 }

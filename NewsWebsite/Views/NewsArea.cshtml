@@ -2,6 +2,8 @@
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 @{
 	Layout = "SiteMaster.cshtml";
+    var allNews = Model.Content.Children<News>()
+        .OrderByDescending(n => n.NewsDate);
 }
 
 <!-- Content Start -->
@@ -12,8 +14,21 @@
 
             <h1 class="display-3">@Model.Content.Headline</h1>
 
-            @Model.Content.Bodytext
+            @Model.Content.BodyText
         </div>
+    </div>
+    <div class="row">
+        <hr />
+        @foreach(var item in allNews)
+        { 
+            <div class="col-md-4">
+                <h2>@item.Headline</h2>
+                <em>@item.NewsDate.ToShortDateString()</em>
+                <img class="img-fluid" src="@item.NewsImage.Url" alt="Alternate Text" />
+                <p>@item.Excerpt</p>
+                <a href="@item.Url">Read More</a>
+            </div>
+        }
     </div>
 </div>
 <hr class="my-4">
